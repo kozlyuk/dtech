@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+
+###########
+# BACKEND #
+###########
+
+  dtech_back:
+    restart: always
+    build: ../
+    # image: &img kozlyuk/dtech:dtech_latest
+    container_name: dtech_back
+    # ports:
+    #   - "8000:8000"
+    command: ['gunicorn', '--bind', '127.0.0.1:8000', 'dtech.wsgi:application',
+      '--worker-tmp-dir', '/dev/shm', '--workers', '2',
+      '--threads', '4', '--worker-class', 'gthread']
+    # command: ['python', 'manage.py', 'runserver']
+    network_mode: host
+    env_file:
+      - ./.env
+    volumes:
+      - ./media:/home/dtech/media
+      - ./static:/home/dtech/dtech/static
+    entrypoint: ['/home/dtech/entrypoint.sh']
+
+#########
+# REDIS #
+#########
+
+  # redis:
+  #   restart: always
+  #   image: "redis:4-alpine"
+  #   ports:
+  #     - "6379:6379"
+  #   network_mode: host
+
+###############
+# CELERY BEAT #
+###############
+
+  # celery_beat:
+  #   restart: always
+  #   image: *img
+  #   container_name: acmon_celery_beat
+  #   command: celery -A dtech worker --beat -l info -S django
+  #   env_file:
+  #     - .env
+  #   network_mode: host
