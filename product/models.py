@@ -13,24 +13,24 @@ def docs_directory_path(filename):
     return 'docs/{0}/{1}/{2}'.format(filename, datetime.now().year, datetime.now().month)
 
 
-    Created = 'CR'
-    InWork = 'IW'
-    Accepted = 'AC'
-    Configured = 'CO'
-    Tested = 'TE'
-    Sent = 'SE'
-    Rejected = 'RE'
-    Fixed = 'FI'
-    STATUS_CHOICES = (
-        (Created, _('Created')),
-        (InWork, _('In work')),
-        (Accepted, _('Accepted from producer')),
-        (Configured, _('Configured')),
-        (Tested, _('Tested')),
-        (Sent, _('Sent to customer')),
-        (Rejected, _('Rejected')),
-        (Fixed, _('Fixed')),
-    )
+Created = 'CR'
+InWork = 'IW'
+Accepted = 'AC'
+Configured = 'CO'
+Tested = 'TE'
+Sent = 'SE'
+Rejected = 'RE'
+Fixed = 'FI'
+STATUS_CHOICES = (
+    (Created, _('Created')),
+    (InWork, _('In work')),
+    (Accepted, _('Accepted from producer')),
+    (Configured, _('Configured')),
+    (Tested, _('Tested')),
+    (Sent, _('Sent to customer')),
+    (Rejected, _('Rejected')),
+    (Fixed, _('Fixed')),
+)
 
 class ComponentType(models.Model):
     """ Model contains Component Types """
@@ -49,7 +49,7 @@ class Component(models.Model):
     name = models.CharField(_('Product title'), max_length=255, unique=True)
     short_description = models.TextField(_('Short description'))
     component_type = models.ForeignKey(ComponentType, on_delete=models.PROTECT)
-    image = models.ImageField(_('Product image'), upload_to='product/')
+    image = models.ImageField(_('Product image'), upload_to='product/', blank=True, null=True)
     specifications_url = models.URLField(_('Specification'), blank=True, null=True)
 
     # Creating information
@@ -68,7 +68,7 @@ class Configuration(models.Model):
     """ Model contains Configurations """
     name = models.CharField(_('Product title'), max_length=255, unique=True)
     short_description = models.TextField(_('Short description'))
-    image = models.ImageField(_('Product image'), upload_to='product/')
+    image = models.ImageField(_('Product image'), upload_to='product/', blank=True, null=True)
     components = models.ManyToManyField(Component)
     manual = ContentTypeRestrictedFileField(_('Product manual'), upload_to=docs_directory_path,
                                               content_types=['application/pdf',
