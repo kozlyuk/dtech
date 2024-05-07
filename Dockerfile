@@ -19,7 +19,7 @@ RUN pip3 install --no-cache-dir wheel
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 FROM ubuntu:22.04 AS runner-image
-RUN apt-get update && apt-get install --no-install-recommends -y python3.10 python3-venv && \
+RUN apt-get update && apt-get install --no-install-recommends -y netcat python3.10 python3-venv && \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --create-home dtech
