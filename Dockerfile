@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 FROM python:3.12-slim-bookworm as runtime
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends libpq-dev \
+  && apt-get install -y --no-install-recommends netcat-traditional libpq-dev \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
   && apt-get clean \
   && useradd --create-home --no-log-init dtech
