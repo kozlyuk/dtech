@@ -10,7 +10,7 @@ Pillow
 # admin-totals
 
 # Deploying tools
-django-dotenv
+python_dotenv
 gunicorn
 
 # Debuging tools

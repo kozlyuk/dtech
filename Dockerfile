@@ -1,38 +1,33 @@
-# using ubuntu LTS version
-FROM ubuntu:22.04 AS builder-image
+# Stage 1: Build
+FROM python:3.12-bookworm as build
 
-# avoid stuck build due to user prompt
-ARG DEBIAN_FRONTEND=noninteractive
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install --no-install-recommends -y python3.10 python3.10-dev python3.10-venv python3-pip python3-wheel \
-    libpq-dev build-essential && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+ENV VIRTUAL_ENV=/opt/venv
+RUN python -m venv $VIRTUAL_ENV
+# Enable venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# create and activate virtual environment
-# using final folder name to avoid path issues with packages
-RUN python3 -m venv /home/dtech/venv
-ENV PATH="/home/dtech/venv/bin:$PATH"
-
-# install requirements
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir wheel
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-FROM ubuntu:22.04 AS runner-image
-RUN apt-get update && apt-get install --no-install-recommends -y netcat python3.10 python3-venv && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+# Stage 2: Runtime
+FROM python:3.12-slim-bookworm as runtime
 
-RUN useradd --create-home dtech
-COPY --from=builder-image /home/dtech/venv /home/dtech/venv
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends libpq-dev \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean \
+  && useradd --create-home --no-log-init dtech
 
 USER dtech
 WORKDIR /home/dtech
-COPY ./entrypoint.sh .
-COPY . .
 
-# make sure all messages always reach console
-ENV PYTHONUNBUFFERED=1
-
-# activate virtual environment
+# set environment variables
 ENV VIRTUAL_ENV=/home/dtech/venv
-ENV PATH="/home/dtech/venv/bin:$PATH"
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY --from=build --chown=dtech:dtech /opt/venv venv
+COPY --chown=dtech:dtech . .
