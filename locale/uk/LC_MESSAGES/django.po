@@ -398,7 +398,7 @@ msgstr "Нові"
 
 #: templates/admin/index.html:66
 msgid "Add"
-msgstr "Адреса"
+msgstr "Додати"
 
 #: templates/admin/index.html:73
 msgid "View"

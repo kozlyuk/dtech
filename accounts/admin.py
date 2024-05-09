@@ -43,7 +43,7 @@ class CustomUserAdmin(UserAdmin):
             if obj.is_staff:
                 group = Group.objects.get(name='Менеджери')
             elif obj.is_active:
-                group = Group.objects.get(name='Клієнти')
+                group = Group.objects.get(name='Підрядники')
             obj.groups.add(group)
         super().save_model(request, obj, form, change)
 

@@ -11,41 +11,29 @@ class ComponentTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
-    pass
+    exclude = ['creator']
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.creator = request.user
+        obj.save()
 
 
 @admin.register(Configuration)
 class ConfigurationAdmin(admin.ModelAdmin):
-    pass
-
+    exclude = ['creator']
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.creator = request.user
+        obj.save()
+        
+        
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    pass
-
-# @admin.register(ProductInstance)
-# class ProductInstanceAdmin(admin.ModelAdmin):
-#     """ Admin settings for ProductInstance table """
-#     list_display = [
-#         "product",
-#         "cylinder",
-#         "diopter",
-#         "price",
-#         "quantity_in_hand",
-#     ]
-#     fieldsets = [
-#         (None, {'fields': ['product',
-#                            'cylinder',
-#                            'diopter',
-#                            'price',
-#                            'quantity_in_hand',
-#                            ]})
-#     ]
-#     readonly_fields = [
-#         "product",
-#         "cylinder",
-#         "diopter",
-#         "quantity_in_hand",
-#     ]
-#     list_filter = ('cylinder', 'diopter',)
-#     ordering = ('pk',)
-
+    exclude = ['creator']
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.creator = request.user
+        obj.save()
