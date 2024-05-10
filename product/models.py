@@ -3,34 +3,17 @@
 from datetime import datetime
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Max
 from .formatChecker import ContentTypeRestrictedFileField
 
 from accounts.models import User
+from purchase.models import Order
 
 
 def docs_directory_path(filename):
     """  file will be uploaded to MEDIA_ROOT/invoices/Year/Month/<filename> """
     return 'docs/{0}/{1}/{2}'.format(filename, datetime.now().year, datetime.now().month)
 
-
-Created = 'CR'
-InWork = 'IW'
-Accepted = 'AC'
-Configured = 'CO'
-Tested = 'TE'
-Sent = 'SE'
-Rejected = 'RE'
-Fixed = 'FI'
-STATUS_CHOICES = (
-    (Created, _('Created')),
-    (InWork, _('In work')),
-    (Accepted, _('Accepted from producer')),
-    (Configured, _('Configured')),
-    (Tested, _('Tested')),
-    (Sent, _('Sent to customer')),
-    (Rejected, _('Rejected')),
-    (Fixed, _('Fixed')),
-)
 
 class ComponentType(models.Model):
     """ Model contains Component Types """
@@ -95,9 +78,31 @@ class Configuration(models.Model):
 
 class Device(models.Model):
     """ Model contains Devices """
-    serial_number = models.CharField(_('Serial number'), max_length=32, unique=True)
-    short_description = models.TextField(_('Short description'))
+    
+    Created = 'CR'
+    InWork = 'IW'
+    Configured = 'CO'
+    Tested = 'TE'
+    Accepted = 'AC'
+    Sent = 'SE'
+    Rejected = 'RE'
+    Fixed = 'FI'
+    STATUS_CHOICES = (
+        (Created, _('Created')),
+        (InWork, _('In work')),
+        (Configured, _('Configured')),
+        (Tested, _('Tested')),
+        (Accepted, _('Accepted from producer')),
+        (Sent, _('Sent to customer')),
+        (Rejected, _('Rejected')),
+        (Fixed, _('Fixed')),
+    )
+    
+    serial_number = models.IntegerField(_('Serial number'), unique=True)
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
+    status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
+    short_description = models.TextField(_('Short description'))
 
     # Creating information
     creator = models.ForeignKey(User, verbose_name='Створив', related_name='device_creators', on_delete=models.PROTECT)
@@ -110,20 +115,9 @@ class Device(models.Model):
     def __str__(self):
         return self.name
 
-
-class Batch(models.Model):
-    """ Model contains Batches """
-    devices = models.ManyToManyField(Device)
-    quantity = models.PositiveSmallIntegerField(_('Number of devices'))
-    short_description = models.TextField(_('Short description'))
-
-    # Creating information
-    creator = models.ForeignKey(User, verbose_name='Створив', related_name='batch_creators', on_delete=models.PROTECT)
-    creation_date = models.DateField(auto_now_add=True)
-    
-    class Meta:
-        verbose_name = _('Batch')
-        verbose_name_plural = _('Batches')
-
-    def __str__(self):
-        return self.name
+    def save(self, *args, logging=True, **kwargs):
+        if not self.pk:
+            # Automatic set serial_number
+            self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+        super().save(*args, **kwargs)
+                

@@ -1,5 +1,8 @@
 from django.db import models
 
+from accounts.models import User
+
+
 class Requisites(models.Model):
     name = models.CharField('Назва', max_length=50, unique=True)
     full_name = models.CharField('Повна назва', max_length=100, blank=True)
@@ -38,8 +41,8 @@ class Company(Requisites):
         ('wvat', 'З ПДВ'),
         ('wovat', 'Без ПДВ'),
     )
-    chief = models.ForeignKey(Employee, verbose_name='Керівник', related_name='company_chiefs', on_delete=models.PROTECT)
-    accountant = models.ForeignKey(Employee, verbose_name='Бухгалтер', related_name='company_accountant', on_delete=models.PROTECT)
+    chief = models.ForeignKey(User, verbose_name='Керівник', related_name='company_chiefs', on_delete=models.PROTECT)
+    accountant = models.ForeignKey(User, verbose_name='Бухгалтер', related_name='company_accountant', on_delete=models.PROTECT)
     taxation = models.CharField('Система оподаткування', max_length=5, choices=TAXATION_CHOICES, default='wvat')
     active = models.BooleanField('Активний', default=True)
 

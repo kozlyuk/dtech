@@ -23,7 +23,8 @@ urlpatterns = [
     path('', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('product/', include('product.urls')),
-    # path('purchase/', include('purchase.urls')),
+    path('structure/', include('structure.urls')),
+    path('purchase/', include('purchase.urls')),
 
     path('favicon.ico', RedirectView.as_view(url='/media/favicon.ico'), name="favicon"),
 
