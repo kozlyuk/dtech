@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 from accounts.models import User
+from structure.models import Customer
 
 class Order(models.Model):
     """ Model contains Sales, Carts """
@@ -18,7 +19,7 @@ class Order(models.Model):
         (Sent, _('Sent to customer')),
     )
     
-    customer = models.ForeignKey(User, verbose_name=_('Customer'), on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name=_('Customer'), on_delete=models.CASCADE)
     deal_number = models.CharField(_('Deal number'), max_length=45)
     value = models.DecimalField(_('Price'), max_digits=8, decimal_places=2, default=0)
     status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
@@ -37,3 +38,10 @@ class Order(models.Model):
 
     def __str__(self):
         return self.deal_number
+
+    # def save(self, *args, logging=True, **kwargs):
+    #     if not self.pk:
+    #         # Bulk create devices
+    #         self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+    #     super().save(*args, **kwargs)
+                
