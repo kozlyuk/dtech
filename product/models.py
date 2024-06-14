@@ -105,7 +105,6 @@ class Device(models.Model):
     short_description = models.TextField(_('Short description'))
 
     # Creating information
-    creator = models.ForeignKey(User, verbose_name='Створив', related_name='device_creators', on_delete=models.PROTECT)
     creation_date = models.DateField(auto_now_add=True)
     
     class Meta:
@@ -113,11 +112,11 @@ class Device(models.Model):
         verbose_name_plural = _('Devices')
 
     def __str__(self):
-        return self.name
+        return str(self.serial_number)
 
-    def save(self, *args, logging=True, **kwargs):
-        if not self.pk:
-            # Automatic set serial_number
-            self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
-        super().save(*args, **kwargs)
+    # def save(self, *args, logging=True, **kwargs):
+    #     if not self.pk:
+    #         # Automatic set serial_number
+    #         self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+    #     super().save(*args, **kwargs)
                 
