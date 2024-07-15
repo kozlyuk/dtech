@@ -1,6 +1,6 @@
 """ Models for managing products """
 
-from datetime import datetime
+from datetime import datetime, date
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Max
@@ -8,6 +8,7 @@ from .formatChecker import ContentTypeRestrictedFileField
 
 from accounts.models import User
 from purchase.models import Order
+from structure.models import Contractor
 
 
 def docs_directory_path(filename):
@@ -64,7 +65,7 @@ class Configuration(models.Model):
     specifications_url = models.URLField(_('Specification'), blank=True, null=True)
 
     # Creating information
-    creator = models.ForeignKey(User, verbose_name='Створив', related_name='configuration_creators', on_delete=models.PROTECT)
+    creator = models.ForeignKey(User, verbose_name=_('Creator'), related_name='configuration_creators', on_delete=models.PROTECT)
     creation_date = models.DateField(auto_now_add=True)
     
     class Meta:
@@ -99,10 +100,10 @@ class Device(models.Model):
     )
     
     serial_number = models.IntegerField(_('Serial number'), unique=True)
+    executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), null=True, on_delete=models.SET_NULL)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
     status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
-    short_description = models.TextField(_('Short description'))
 
     # Creating information
     creation_date = models.DateField(auto_now_add=True)
@@ -120,3 +121,36 @@ class Device(models.Model):
     #         self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
     #     super().save(*args, **kwargs)
                 
+
+class Event(models.Model):
+
+    Issued = 'IS'
+    Accepted = 'AC'
+    Configured = 'CO'
+    Tested = 'TE'
+    Sent = 'SE'
+    Rejected = 'RE'
+    Fixed = 'FI'
+    EVENT_CHOICES = (
+        (Issued, _('Issued for work')),
+        (Accepted, _('Accepted from producer')),
+        (Configured, _('Configured')),
+        (Tested, _('Tested')),
+        (Sent, _('Sent to customer')),
+        (Rejected, _('Rejected')),
+        (Fixed, _('Fixed')),
+    )
+    
+    device = models.ForeignKey(Device, verbose_name= _('Device'), null=True, on_delete=models.SET_NULL)
+    date = models.DateField('Дата', default=date.today)
+    event = models.CharField(_('Event'), max_length=2, choices=EVENT_CHOICES, default=Issued)
+    comment = models.CharField('Comment', max_length=255)
+    creator = models.ForeignKey(User, verbose_name= _('Creator'), null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = _('Event')
+        verbose_name_plural = _('Events')
+        ordering = ["-date"]
+
+    def __str__(self):
+        return f'{self.date} - {self.status}'

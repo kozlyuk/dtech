@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from product.models import ComponentType, Component, Configuration, Device
+from product.models import ComponentType, Component, Configuration, Device, Event
 
 @admin.register(ComponentType)
 class ComponentTypeAdmin(admin.ModelAdmin):
@@ -28,10 +28,17 @@ class ConfigurationAdmin(admin.ModelAdmin):
             obj.creator = request.user
         obj.save()
         
-        
+
+class EventInline(admin.TabularInline):
+    model = Event
+    fields = ['event', 'date', 'comment']
+    extra = 0
+
+
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
     exclude = ['creator']
+    inlines = [EventInline]
     
     def save_model(self, request, obj, form, change):
         if not change:

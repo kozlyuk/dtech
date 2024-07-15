@@ -7,8 +7,9 @@ from product.models import Device
 
 class DeviceInline(admin.TabularInline):
     model = Device
-    fields = ['serial_number', 'configuration', 'status']
+    fields = ['serial_number', 'executor', 'configuration', 'status']
     extra = 0
+
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
