@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 from accounts.models import User
-from structure.models import Customer
+from structure.models import Customer, Company
 
 class Order(models.Model):
     """ Model contains Sales, Carts """
@@ -20,6 +20,7 @@ class Order(models.Model):
     )
     
     customer = models.ForeignKey(Customer, verbose_name=_('Customer'), on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, verbose_name=_('Company'), on_delete=models.CASCADE)
     deal_number = models.CharField(_('Deal number'), max_length=45)
     value = models.DecimalField(_('Price'), max_digits=10, decimal_places=2, default=0)
     status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
