@@ -100,7 +100,7 @@ class Device(models.Model):
     )
     
     serial_number = models.IntegerField(_('Serial number'), unique=True)
-    executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), null=True, on_delete=models.SET_NULL)
+    executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), on_delete=models.PROTECT)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
     status = models.CharField(_('Status'), max_length=2, choices=STATUS_CHOICES, default=Created)
@@ -160,7 +160,7 @@ class Event(models.Model):
     )
     
     device = models.ForeignKey(Device, verbose_name= _('Device'), null=True, on_delete=models.SET_NULL)
-    date = models.DateField('Дата', default=date.today)
+    date = models.DateField('Дата')
     event = models.CharField(_('Event'), max_length=2, choices=EVENT_CHOICES, default=Issued)
     comment = models.CharField('Comment', max_length=255, blank=True, null=True)
     creator = models.ForeignKey(User, verbose_name= _('Creator'), null=True, on_delete=models.SET_NULL)

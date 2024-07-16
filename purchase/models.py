@@ -22,6 +22,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, verbose_name=_('Customer'), on_delete=models.CASCADE)
     company = models.ForeignKey(Company, verbose_name=_('Company'), on_delete=models.CASCADE)
     deal_number = models.CharField(_('Deal number'), max_length=45)
+    deal_date = models.DateField('Дата')
     value = models.DecimalField(_('Price'), max_digits=10, decimal_places=2, default=0)
     status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
     number_of_devices = models.PositiveSmallIntegerField(_('Number of devices'), blank=True, null=True)
