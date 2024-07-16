@@ -115,11 +115,29 @@ class Device(models.Model):
     def __str__(self):
         return str(self.serial_number)
 
-    # def save(self, *args, logging=True, **kwargs):
-    #     if not self.pk:
-    #         # Automatic set serial_number
-    #         self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
-    #     super().save(*args, **kwargs)
+    def save(self, *args, logging=True, **kwargs):
+        last_event = self.event_set.last()
+        event_status = last_event.event if last_event else None
+        match event_status:
+            case None:
+                self.status = self.Created
+            case Event.Issued:
+                self.status = self.InWork
+            case Event.Accepted:
+                self.status = self.Accepted
+            case Event.Configured:
+                self.status = self.Configured
+            case Event.Tested:
+                self.status = self.Tested
+            case Event.Sent:
+                self.status = self.Sent
+            case Event.Rejected:
+                self.status = self.Rejected
+            case Event.Fixed:
+                self.status = self.Fixed
+            case _:
+                pass
+        super().save(*args, **kwargs)
                 
 
 class Event(models.Model):
@@ -144,13 +162,17 @@ class Event(models.Model):
     device = models.ForeignKey(Device, verbose_name= _('Device'), null=True, on_delete=models.SET_NULL)
     date = models.DateField('Дата', default=date.today)
     event = models.CharField(_('Event'), max_length=2, choices=EVENT_CHOICES, default=Issued)
-    comment = models.CharField('Comment', max_length=255)
+    comment = models.CharField('Comment', max_length=255, blank=True, null=True)
     creator = models.ForeignKey(User, verbose_name= _('Creator'), null=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
-        ordering = ["-date"]
+        ordering = ['-date', 'pk']
 
     def __str__(self):
-        return f'{self.date} - {self.status}'
+        return f'{self.date} - {self.event}'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.device.save()

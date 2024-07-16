@@ -22,6 +22,7 @@ class ComponentAdmin(admin.ModelAdmin):
 @admin.register(Configuration)
 class ConfigurationAdmin(admin.ModelAdmin):
     exclude = ['creator']
+    filter_horizontal = ['components', ]
     
     def save_model(self, request, obj, form, change):
         if not change:
@@ -38,8 +39,9 @@ class EventInline(admin.TabularInline):
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
     exclude = ['creator']
+    readonly_fields = ['status']
     inlines = [EventInline]
-    
+
     def save_model(self, request, obj, form, change):
         if not change:
             obj.creator = request.user
