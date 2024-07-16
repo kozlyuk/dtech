@@ -13,5 +13,7 @@ class DeviceInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-
+    list_display = ['deal_number', 'customer', 'company', 'number_of_devices', 'status']
+    list_filter = ['customer', 'company', 'status']
+    search_fields = ['deal_number']
     inlines = [DeviceInline]

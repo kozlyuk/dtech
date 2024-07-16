@@ -103,7 +103,7 @@ class Device(models.Model):
     executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), null=True, on_delete=models.SET_NULL)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
-    status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
+    status = models.CharField(_('Status'), max_length=2, choices=STATUS_CHOICES, default=Created)
 
     # Creating information
     creation_date = models.DateField(auto_now_add=True)

@@ -8,9 +8,11 @@ from product.models import ComponentType, Component, Configuration, Device, Even
 class ComponentTypeAdmin(admin.ModelAdmin):
     pass
 
-
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'component_type']
+    list_filter = ['component_type__name']
+    search_fields = ['name', 'short_description']
     exclude = ['creator']
     
     def save_model(self, request, obj, form, change):
@@ -38,6 +40,9 @@ class EventInline(admin.TabularInline):
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
+    list_display = ['serial_number', 'configuration', 'executor', 'order', 'status']
+    list_filter = ['configuration', 'executor', 'status']
+    search_fields = ['serial_number', 'order']
     exclude = ['creator']
     readonly_fields = ['status']
     inlines = [EventInline]
