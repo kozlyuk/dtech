@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 11:49+0300\n"
+"POT-Creation-Date: 2024-07-16 17:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,403 +21,211 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: accounts/api.py:63
-msgid "Order does not exist"
-msgstr "Замовлення не існує"
-
-#: accounts/api.py:67
-msgid "Order cancelled."
-msgstr "Замовлення скасовано."
-
-#: accounts/api.py:83
-msgid "Activate your Envista account."
-msgstr "Активуйте Ваш Envista аккаунт."
-
-#: accounts/api.py:91
-msgid "User registered"
-msgstr "Користувача зареєстровано"
-
-#: accounts/api.py:114
-msgid ""
-"Thank you for your email confirmation. You will be able to log in to your "
-"account after being activated by administrator."
-msgstr ""
-"Дякуємо за підтвердження електронної адреси.Ви можете авторизуватись після "
-"підтвердження облікового запису адміністратором."
-
-#: accounts/api.py:119
-msgid "Activation link is invalid!"
-msgstr "Код активації не валідний"
-
 #: accounts/forms.py:9 accounts/forms.py:49
 msgid "Password"
 msgstr "Пароль"
 
 #: accounts/forms.py:11
 msgid "Password confirmation"
-msgstr "Підтвердження пароля"
+msgstr "Підтрвердження паролю"
 
 #: accounts/forms.py:27 accounts/forms.py:46 accounts/managers.py:23
 msgid "User with such email already exist"
-msgstr "Користувач з такою електронною адресою вже існує"
+msgstr "Користувач з таким email існує"
 
 #: accounts/forms.py:50
 msgid ""
 "You can change the password using <a href=\"../password/\">this form</a>."
-msgstr ""
-"Ви можете змінити пароль <a href=\"../password/\">за цим посиланням</a>."
+msgstr "Ви можете змінити пароль використовуючи <a href=\"../password/\">цю форму</a>."
 
-#: accounts/managers.py:20
+#: accounts/managers.py:21
 msgid "Users must have an email address"
-msgstr "Користувач повинен мати електронну адресу"
+msgstr "Вкажіть будь ласка електронну адресу"
+
+#: accounts/managers.py:25
+msgid "Users must have an mobile number"
+msgstr "Вкажіть будь ласка мобільний телефону"
+
+#: accounts/managers.py:27
+msgid "User with such mobile number already exist"
+msgstr "Користувач з таким мобільним телефоном існує"
+
+#: accounts/models.py:17
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1909
+msgid "Email address"
+msgstr "Email адреса"
 
 #: accounts/models.py:18
-#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1646
-msgid "Email address"
-msgstr "Електронна адреса"
-
-#: accounts/models.py:19
 msgid "Mobile number"
 msgstr "Мобільний телефон"
 
-#: accounts/models.py:20
-msgid "Address"
-msgstr "Адреса"
-
-#: accounts/models.py:21 purchase/models.py:22 purchase/models.py:68
+#: accounts/models.py:19 purchase/models.py:29
 msgid "Comment"
 msgstr "Коментар"
 
-#: accounts/models.py:23
+#: accounts/models.py:20
 msgid "Email confirmed"
-msgstr "Електронну пошту підтверджено"
+msgstr "Email підтвердженно"
 
-#: product/models.py:10
+#: product/formatChecker.py:58
+msgid "File extension does not supported."
+msgstr "Розширення фойлу не підтримується."
+
+#: product/formatChecker.py:63
+msgid "The file must be in PDF or XLSX or DOCX format.."
+msgstr "Файл має бути у PDF або XLSX або DOCX форматі."
+
+#: product/formatChecker.py:67
+#, python-format
+msgid "The file must be less than %s. Розмір підвантажуваного файлу %s"
+msgstr "Файл не може бути більшим %s. File size is %s"
+
+#: product/models.py:21 product/models.py:24
+msgid "Component Type"
+msgstr "Тип компоненти"
+
+#: product/models.py:25
+msgid "Component Types"
+msgstr "Типи компонентів"
+
+#: product/models.py:33 product/models.py:53
 msgid "Product title"
 msgstr "Назва продукту"
 
-#: product/models.py:11
+#: product/models.py:34 product/models.py:54
 msgid "Short description"
-msgstr "Опис продукту"
+msgstr "Короткий опис"
 
-#: product/models.py:12
+#: product/models.py:36 product/models.py:55
 msgid "Product image"
 msgstr "Картинка продукту"
 
-#: product/models.py:13
-msgid "Brand name"
-msgstr "Назва бренду"
-
-#: product/models.py:14
-msgid "Brand Image"
-msgstr "Логотип бренду"
-
-#: product/models.py:15
+#: product/models.py:37 product/models.py:65
 msgid "Specification"
 msgstr "Специфікація"
 
-#: product/models.py:16
-msgid "Telegram bot url"
-msgstr "Посилання на Telegram бота"
-
-#: product/models.py:17
-msgid "Site footer"
-msgstr "Футер сайту"
-
-#: product/models.py:20
-msgid "Product"
-msgstr "Продукт"
-
-#: product/models.py:21
-msgid "Products"
-msgstr "Продукти"
-
-#: product/models.py:29 product/models.py:42
-msgid "Value"
-msgstr "Значення"
-
-#: product/models.py:32
-msgid "Diopter Power"
-msgstr "Сфера"
-
-#: product/models.py:33
-msgid "Diopter Powers"
-msgstr "Сфери"
+#: product/models.py:44
+msgid "Component"
+msgstr "Компонента"
 
 #: product/models.py:45
-msgid "Cylinder"
-msgstr "Циліндер"
+msgid "Components"
+msgstr "Компоненти"
 
-#: product/models.py:46
-msgid "Cylinders"
-msgstr "Циліндри"
+#: product/models.py:57
+msgid "Product manual"
+msgstr "Інструкція користувача"
 
-#: product/models.py:58
-msgid "Product price"
-msgstr "Ціна продукту"
-
-#: product/models.py:59
-msgid "Quantity in hand"
-msgstr "Кількість на складі"
-
-#: product/models.py:62
-msgid "Product Instance"
-msgstr "Екземпляр продукту"
-
-#: product/models.py:63
-msgid "Product Instances"
-msgstr "Екземпляри продукту"
-
-#: purchase/admin.py:20 purchase/models.py:69
-msgid "Order status"
-msgstr "Статус замовлення"
-
-#: purchase/admin.py:65 purchase/admin.py:213
-msgid "Quantity must be more then 0"
-msgstr "Кількість має бути більша 0"
-
-#: purchase/admin.py:70 purchase/admin.py:219
-msgid "Product is not enough in stock. Available - {}"
-msgstr "Не достатня кількість на складі. Доступно - {}"
-
-#: purchase/admin.py:171
-msgid "New orders status can be changed to Confirmed or Canceled"
-msgstr "Статус замовлення може бути змінений на Підтверджено або Скасовано"
-
-#: purchase/admin.py:176
-msgid "Confirmed orders status can be changed only to Returned"
-msgstr "Підтверджене замовлення може бути змінене тільки на Скасовано"
-
-#: purchase/admin.py:180
-msgid "Cancelled orders can't be changed"
-msgstr "Відмінені замовлення не можуть бути змінені"
-
-#: purchase/admin.py:184
-msgid "Returned orders can't be changed"
-msgstr "Повернені замовлення не можуть бути змінені"
-
-#: purchase/admin.py:189
-msgid "Preorders status can be changed to NewOrder, Confirmed or Canceled"
-msgstr "Статус замовлення може бути змінений на Новий, Підтверджено або Скасовано"
-
-#: purchase/api.py:52 purchase/api.py:99 purchase/api.py:151
-#: purchase/api.py:192
-msgid "Few carts exists"
-msgstr "Існує декілька кошиків"
-
-#: purchase/api.py:91 purchase/api.py:143 purchase/api.py:327
-#: purchase/api.py:364
-msgid "Product does not exist"
-msgstr "Такого продукту не існує"
-
-#: purchase/api.py:97 purchase/api.py:149 purchase/api.py:190
-msgid "Cart does not exist"
-msgstr "Корзина не існує"
-
-#: purchase/api.py:115
-msgid "Product added to the cart"
-msgstr "Продукт додано до кошика"
-
-#: purchase/api.py:125
-msgid "Preorder added to the cart"
-msgstr "Попереднє замовлення додано до кошика"
-
-#: purchase/api.py:163
-msgid "Order type does not exist"
-msgstr "Тип замовлення не існує"
-
-#: purchase/api.py:167
-msgid "Product is out of stock"
-msgstr "Не достатня кількість товару на складі"
-
-#: purchase/api.py:172 purchase/api.py:379
-msgid "Product updated"
-msgstr "Кількість продукту оновлено"
-
-#: purchase/api.py:176 purchase/api.py:381
-msgid "Product not in cart"
-msgstr "Продукт відсутній в кошику"
-
-#: purchase/api.py:227
-msgid "Pre-order accepted!"
-msgstr "Попереднє замовлення прийнято"
-
-#: purchase/api.py:251
-msgid "Order accepted. Wait for call from manager please!"
-msgstr "Замовлення прийнято. Чекайте на дзвінок менеджера."
-
-#: purchase/api.py:254
-msgid "Order if empty! Please add products"
-msgstr "Кошик порожній. Додайте товари"
-
-#: purchase/api.py:297 purchase/api.py:333 purchase/api.py:370
-#: purchase/api.py:395 purchase/api.py:431
-msgid "Purchase does not exist"
-msgstr "Продукт не існує"
-
-#: purchase/api.py:299 purchase/api.py:335 purchase/api.py:372
-#: purchase/api.py:397 purchase/api.py:433
-msgid "Few purchases exists"
-msgstr "Існує декілька закупівель"
-
-#: purchase/api.py:347
-msgid "Product added to the purchase"
-msgstr "Продукт додано до закупівлі"
-
-#: purchase/api.py:414
-msgid "Purchase accepted."
-msgstr "Закупівлю збережено"
-
-#: purchase/api.py:416
-msgid "Purchase is empty! Please add products"
-msgstr "Закупівля порожня! Додайте товари"
-
-#: purchase/api.py:437
-msgid "Purchase cleared."
-msgstr "Закупівлю обнулено"
-
-#: purchase/models.py:20 purchase/models.py:65 purchase/models.py:130
-#: purchase/models.py:153
-msgid "Goods"
-msgstr "Товари"
-
-#: purchase/models.py:21 purchase/models.py:67
-msgid "Invoice number"
-msgstr "Номер замовлення"
-
-#: purchase/models.py:24 purchase/models.py:74
-msgid "Created by"
+#: product/models.py:68 product/models.py:166
+msgid "Creator"
 msgstr "Створив"
 
-#: purchase/models.py:26 purchase/models.py:76
-msgid "Date created"
-msgstr "Дата створення"
+#: product/models.py:72
+msgid "Configuration"
+msgstr "Конфігурація"
 
-#: purchase/models.py:27 purchase/models.py:77
-msgid "Date updated"
-msgstr "Дата оновлення"
+#: product/models.py:73
+msgid "Configurations"
+msgstr "Конфігурації"
 
-#: purchase/models.py:30 purchase/models.py:129
-msgid "Purchase"
-msgstr "Закупівля"
+#: product/models.py:92 purchase/models.py:16
+msgid "Created"
+msgstr "Створений"
 
-#: purchase/models.py:31
-msgid "Purchases"
-msgstr "Закупівлі"
+#: product/models.py:93 purchase/models.py:17
+msgid "In work"
+msgstr "В роботі"
 
-#: purchase/models.py:45 purchase/models.py:124
-msgid "Generate invoice number"
-msgstr "Генерація номеру Замовлення"
+#: product/models.py:94 product/models.py:155
+msgid "Configured"
+msgstr "Прошитий"
 
-#: purchase/models.py:57
-msgid "Products in cart"
-msgstr "Продукт в кошику"
+#: product/models.py:95 product/models.py:156
+msgid "Tested"
+msgstr "Протестований"
 
-#: purchase/models.py:58
-msgid "New order"
-msgstr "Нове замовлення"
+#: product/models.py:96 product/models.py:154 purchase/models.py:18
+msgid "Accepted from producer"
+msgstr "Прийнятий від виконавця"
 
-#: purchase/models.py:59
-msgid "Order canceled"
-msgstr "Замовлення скасовано"
+#: product/models.py:97 product/models.py:157 purchase/models.py:19
+msgid "Sent to customer"
+msgstr "Надісланий замовнику"
 
-#: purchase/models.py:60
-msgid "Order confirmed"
-msgstr "Замовлення підтверджено"
+#: product/models.py:98 product/models.py:158
+msgid "Rejected"
+msgstr "Повернутий"
 
-#: purchase/models.py:61 purchase/models.py:150
-msgid "Pre-order"
-msgstr "Попереднє замовлення"
+#: product/models.py:99 product/models.py:159
+msgid "Fixed"
+msgstr "Вдремонтований"
 
-#: purchase/models.py:62
-msgid "Order returned"
-msgstr "Замовлення повернуто"
+#: product/models.py:102
+msgid "Serial number"
+msgstr "Серійний номер"
 
-#: purchase/models.py:66
+#: product/models.py:103
+msgid "Executor"
+msgstr "Виконавець"
+
+#: product/models.py:106
+msgid "Status"
+msgstr "Статус"
+
+#: product/models.py:112 product/models.py:162
+msgid "Device"
+msgstr "Пристрій"
+
+#: product/models.py:113
+msgid "Devices"
+msgstr "Пристрої"
+
+#: product/models.py:153
+msgid "Issued for work"
+msgstr "Видано в роботу"
+
+#: product/models.py:164 product/models.py:169
+msgid "Event"
+msgstr "Подія"
+
+#: product/models.py:170
+msgid "Events"
+msgstr "Події"
+
+#: purchase/models.py:22
 msgid "Customer"
-msgstr "Покупець"
+msgstr "Замовник"
 
-#: purchase/models.py:71
+#: purchase/models.py:23
+msgid "Company"
+msgstr "Компанія"
+
+#: purchase/models.py:24
+msgid "Deal number"
+msgstr "Номер договору"
+
+#: purchase/models.py:25
+msgid "Deal date"
+msgstr "Дата договору"
+
+#: purchase/models.py:26
 msgid "Price"
 msgstr "Ціна"
 
-#: purchase/models.py:72
-msgid "Sum"
-msgstr "Кількість"
+#: purchase/models.py:27
+msgid "Order status"
+msgstr "Статус замовлення"
 
-#: purchase/models.py:80 purchase/models.py:149 purchase/models.py:152
-#: venv/lib/python3.8/site-packages/django/forms/formsets.py:371
-#: venv/lib/python3.8/site-packages/django/forms/formsets.py:373
+#: purchase/models.py:28
+msgid "Number of devices"
+msgstr "Кількість пристроїв"
+
+#: purchase/models.py:37
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:491
 msgid "Order"
 msgstr "Замовлення"
 
-#: purchase/models.py:81
+#: purchase/models.py:38
 msgid "Orders"
 msgstr "Замовлення"
-
-#: purchase/models.py:92
-msgid "Total order value"
-msgstr "Загальна вартість замовлення"
-
-#: purchase/models.py:100
-msgid "Total available value"
-msgstr "Вартість доступного замовлення"
-
-#: purchase/models.py:108
-msgid "Total preorder value"
-msgstr "Вартість попереднього замовлення"
-
-#: purchase/models.py:114
-msgid "Total lenses count in order"
-msgstr "Кількість товарів в замовлені"
-
-#: purchase/models.py:133 purchase/models.py:156
-msgid "Quantity"
-msgstr "Кількість"
-
-#: purchase/models.py:158
-msgid "Unit price"
-msgstr "Ціна за одиницю"
-
-#: purchase/models.py:159
-msgid "Order type"
-msgstr "Тип замовлення"
-
-#: purchase/models.py:169
-msgid "Calculated invoice_line value"
-msgstr "Розрахунок вартості позиції"
-
-#: templates/admin/index.html:12
-#, python-format
-msgid "Models in the %(name)s application"
-msgstr ""
-
-#: templates/admin/index.html:37 templates/admin/index.html:58
-msgid "New"
-msgstr "Нові"
-
-#: templates/admin/index.html:66
-msgid "Add"
-msgstr "Додати"
-
-#: templates/admin/index.html:73
-msgid "View"
-msgstr "Переглянути"
-
-#: templates/admin/index.html:75
-#: venv/lib/python3.8/site-packages/django/forms/widgets.py:397
-msgid "Change"
-msgstr "Змінити"
-
-#: templates/admin/index.html:86
-msgid "You don't have permission to view or edit anything."
-msgstr "Ви не маєте доступу до перегляду або редагування будь чого"
-
-msgid "{something}"
-msgstr ""
-
-#~ msgid "Download Invoice"
-#~ msgstr "Завантажити рахунок"
-
-#~ msgid "Calculated invoice value"
-#~ msgstr "Розрахунок вартості замовлення"
