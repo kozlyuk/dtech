@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-16 17:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: accounts/forms.py:9 accounts/forms.py:49
+msgid "Password"
+msgstr "Пароль"
+
+#: accounts/forms.py:11
+msgid "Password confirmation"
+msgstr "Підтрвердження паролю"
+
+#: accounts/forms.py:27 accounts/forms.py:46 accounts/managers.py:23
+msgid "User with such email already exist"
+msgstr "Користувач з таким email існує"
+
+#: accounts/forms.py:50
+msgid ""
+"You can change the password using <a href=\"../password/\">this form</a>."
+msgstr "Ви можете змінити пароль використовуючи <a href=\"../password/\">цю форму</a>."
+
+#: accounts/managers.py:21
+msgid "Users must have an email address"
+msgstr "Вкажіть будь ласка електронну адресу"
+
+#: accounts/managers.py:25
+msgid "Users must have an mobile number"
+msgstr "Вкажіть будь ласка мобільний телефону"
+
+#: accounts/managers.py:27
+msgid "User with such mobile number already exist"
+msgstr "Користувач з таким мобільним телефоном існує"
+
+#: accounts/models.py:17
+#: venv/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1909
+msgid "Email address"
+msgstr "Email адреса"
+
+#: accounts/models.py:18
+msgid "Mobile number"
+msgstr "Мобільний телефон"
+
+#: accounts/models.py:19 purchase/models.py:29
+msgid "Comment"
+msgstr "Коментар"
+
+#: accounts/models.py:20
+msgid "Email confirmed"
+msgstr "Email підтвердженно"
+
+#: product/formatChecker.py:58
+msgid "File extension does not supported."
+msgstr "Розширення фойлу не підтримується."
+
+#: product/formatChecker.py:63
+msgid "The file must be in PDF or XLSX or DOCX format.."
+msgstr "Файл має бути у PDF або XLSX або DOCX форматі."
+
+#: product/formatChecker.py:67
+#, python-format
+msgid "The file must be less than %s. Розмір підвантажуваного файлу %s"
+msgstr "Файл не може бути більшим %s. File size is %s"
+
+#: product/models.py:21 product/models.py:24
+msgid "Component Type"
+msgstr "Тип компоненти"
+
+#: product/models.py:25
+msgid "Component Types"
+msgstr "Типи компонентів"
+
+#: product/models.py:33 product/models.py:53
+msgid "Product title"
+msgstr "Назва продукту"
+
+#: product/models.py:34 product/models.py:54
+msgid "Short description"
+msgstr "Короткий опис"
+
+#: product/models.py:36 product/models.py:55
+msgid "Product image"
+msgstr "Картинка продукту"
+
+#: product/models.py:37 product/models.py:65
+msgid "Specification"
+msgstr "Специфікація"
+
+#: product/models.py:44
+msgid "Component"
+msgstr "Компонента"
+
+#: product/models.py:45
+msgid "Components"
+msgstr "Компоненти"
+
+#: product/models.py:57
+msgid "Product manual"
+msgstr "Інструкція користувача"
+
+#: product/models.py:68 product/models.py:166
+msgid "Creator"
+msgstr "Створив"
+
+#: product/models.py:72
+msgid "Configuration"
+msgstr "Конфігурація"
+
+#: product/models.py:73
+msgid "Configurations"
+msgstr "Конфігурації"
+
+#: product/models.py:92 purchase/models.py:16
+msgid "Created"
+msgstr "Створений"
+
+#: product/models.py:93 purchase/models.py:17
+msgid "In work"
+msgstr "В роботі"
+
+#: product/models.py:94 product/models.py:155
+msgid "Configured"
+msgstr "Прошитий"
+
+#: product/models.py:95 product/models.py:156
+msgid "Tested"
+msgstr "Протестований"
+
+#: product/models.py:96 product/models.py:154 purchase/models.py:18
+msgid "Accepted from producer"
+msgstr "Прийнятий від виконавця"
+
+#: product/models.py:97 product/models.py:157 purchase/models.py:19
+msgid "Sent to customer"
+msgstr "Надісланий замовнику"
+
+#: product/models.py:98 product/models.py:158
+msgid "Rejected"
+msgstr "Повернутий"
+
+#: product/models.py:99 product/models.py:159
+msgid "Fixed"
+msgstr "Вдремонтований"
+
+#: product/models.py:102
+msgid "Serial number"
+msgstr "Серійний номер"
+
+#: product/models.py:103
+msgid "Executor"
+msgstr "Виконавець"
+
+#: product/models.py:106
+msgid "Status"
+msgstr "Статус"
+
+#: product/models.py:112 product/models.py:162
+msgid "Device"
+msgstr "Пристрій"
+
+#: product/models.py:113
+msgid "Devices"
+msgstr "Пристрої"
+
+#: product/models.py:153
+msgid "Issued for work"
+msgstr "Видано в роботу"
+
+#: product/models.py:164 product/models.py:169
+msgid "Event"
+msgstr "Подія"
+
+#: product/models.py:170
+msgid "Events"
+msgstr "Події"
+
+#: purchase/models.py:22
+msgid "Customer"
+msgstr "Замовник"
+
+#: purchase/models.py:23
+msgid "Company"
+msgstr "Компанія"
+
+#: purchase/models.py:24
+msgid "Deal number"
+msgstr "Номер договору"
+
+#: purchase/models.py:25
+msgid "Deal date"
+msgstr "Дата договору"
+
+#: purchase/models.py:26
+msgid "Price"
+msgstr "Ціна"
+
+#: purchase/models.py:27
+msgid "Order status"
+msgstr "Статус замовлення"
+
+#: purchase/models.py:28
+msgid "Number of devices"
+msgstr "Кількість пристроїв"
+
+#: purchase/models.py:37
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.10/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr "Замовлення"
+
+#: purchase/models.py:38
+msgid "Orders"
+msgstr "Замовлення"

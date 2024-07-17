@@ -22,14 +22,14 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, verbose_name=_('Customer'), on_delete=models.CASCADE)
     company = models.ForeignKey(Company, verbose_name=_('Company'), on_delete=models.CASCADE)
     deal_number = models.CharField(_('Deal number'), max_length=45)
-    deal_date = models.DateField('Дата')
+    deal_date = models.DateField(_('Deal date'))
     value = models.DecimalField(_('Price'), max_digits=10, decimal_places=2, default=0)
     status = models.CharField(_('Order status'), max_length=2, choices=STATUS_CHOICES, default=Created)
     number_of_devices = models.PositiveSmallIntegerField(_('Number of devices'), blank=True, null=True)
     comment = models.CharField(_('Comment'), max_length=255, blank=True)
 
     # Creating information
-    creator = models.ForeignKey(User, verbose_name='Створив', related_name='order_creators', on_delete=models.PROTECT)
+    creator = models.ForeignKey(User, verbose_name='Created', related_name='order_creators', on_delete=models.PROTECT)
     creation_date = models.DateField(auto_now_add=True)
 
 

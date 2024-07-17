@@ -55,16 +55,16 @@ class ContentTypeRestrictedFileField(FileField):
 
                 if not found:
                     raise forms.ValidationError(
-                        _('Розширення фойлу не підтримується.'))
+                        _('File extension does not supported.'))
 
             # Check content-type if required
             if self.content_types and file.content_type not in self.content_types:
                 raise forms.ValidationError(
-                    _('Файл має бути у PDF або XLSX або DOCX форматі.'))
+                    _('The file must be in PDF or XLSX or DOCX format.'))
 
             # Check file size if required
             if self.max_upload_size and file._size > self.max_upload_size:
-                raise forms.ValidationError(_('Файл не може бути більшим %s. Розмір підвантажуваного файлу %s') % (
+                raise forms.ValidationError(_('The file must be less than %s. File size is %s') % (
                     filesizeformat(self.max_upload_size), filesizeformat(file._size)))
         except AttributeError:
             pass

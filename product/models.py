@@ -37,7 +37,7 @@ class Component(models.Model):
     specifications_url = models.URLField(_('Specification'), blank=True, null=True)
 
     # Creating information
-    creator = models.ForeignKey(User, verbose_name='Створив', related_name='task_creators', on_delete=models.PROTECT)
+    creator = models.ForeignKey(User, verbose_name='Created', related_name='task_creators', on_delete=models.PROTECT)
     creation_date = models.DateField(auto_now_add=True)
     
     class Meta:
@@ -160,7 +160,7 @@ class Event(models.Model):
     )
     
     device = models.ForeignKey(Device, verbose_name= _('Device'), null=True, on_delete=models.SET_NULL)
-    date = models.DateField('Дата')
+    date = models.DateField('Date')
     event = models.CharField(_('Event'), max_length=2, choices=EVENT_CHOICES, default=Issued)
     comment = models.CharField('Comment', max_length=255, blank=True, null=True)
     creator = models.ForeignKey(User, verbose_name= _('Creator'), null=True, on_delete=models.SET_NULL)
