@@ -51,3 +51,17 @@ class DeviceAdmin(admin.ModelAdmin):
         if not change:
             obj.creator = request.user
         obj.save()
+
+    def response_add(self, request, new_object):
+        obj = self.after_saving_model_and_related_inlines(new_object)
+        return super().response_add(request, obj)
+
+    def response_change(self, request, obj):
+        obj = self.after_saving_model_and_related_inlines(obj)
+        return super().response_change(request, obj)
+
+    def after_saving_model_and_related_inlines(self, obj):
+        print(obj.event_set.all())
+        obj.status = obj.get_status()
+        obj.save(update_fields=["status"])
+        return obj

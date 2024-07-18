@@ -115,7 +115,7 @@ class Device(models.Model):
     def __str__(self):
         return str(self.serial_number)
 
-    def save(self, *args, logging=True, **kwargs):
+    def get_status(self):
         last_event = self.event_set.last()
         event_status = last_event.event if last_event else None
         match event_status:
@@ -137,8 +137,8 @@ class Device(models.Model):
                 self.status = self.Fixed
             case _:
                 pass
-        super().save(*args, **kwargs)
-                
+        return self.status
+
 
 class Event(models.Model):
 
@@ -168,7 +168,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
-        ordering = ['-date', 'pk']
+        ordering = ['date', 'pk']
 
     def __str__(self):
         return f'{self.date} - {self.event}'
