@@ -42,7 +42,7 @@ class EventInline(admin.TabularInline):
 class DeviceAdmin(admin.ModelAdmin):
     list_display = ['serial_number', 'configuration', 'executor', 'order', 'status']
     list_filter = ['configuration', 'executor', 'status']
-    search_fields = ['serial_number', 'order']
+    search_fields = ['serial_number', 'order__deal_number']
     exclude = ['creator']
     readonly_fields = ['status']
     inlines = [EventInline]
