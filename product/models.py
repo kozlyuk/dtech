@@ -91,17 +91,17 @@ class Device(models.Model):
     STATUS_CHOICES = (
         (Created, _('Created')),
         (InWork, _('In work')),
+        (Accepted, _('Accepted from producer')),
         (Configured, _('Configured')),
         (Tested, _('Tested')),
-        (Accepted, _('Accepted from producer')),
-        (Sent, _('Sent to customer')),
         (Rejected, _('Rejected')),
+        (Sent, _('Sent to customer')),
         (Fixed, _('Fixed')),
     )
     
     serial_number = models.IntegerField(_('Serial number'), unique=True)
     executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), on_delete=models.PROTECT)
-    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
     status = models.CharField(_('Status'), max_length=2, choices=STATUS_CHOICES, default=Created)
 
@@ -154,8 +154,8 @@ class Event(models.Model):
         (Accepted, _('Accepted from producer')),
         (Configured, _('Configured')),
         (Tested, _('Tested')),
-        (Sent, _('Sent to customer')),
         (Rejected, _('Rejected')),
+        (Sent, _('Sent to customer')),
         (Fixed, _('Fixed')),
     )
     
