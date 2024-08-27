@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Max
 from .formatChecker import ContentTypeRestrictedFileField
+from crum import get_current_user
 
 from accounts.models import User
 from purchase.models import Order
@@ -174,5 +175,7 @@ class Event(models.Model):
         return f'{self.date} - {self.event}'
     
     def save(self, *args, **kwargs):
+        if not self.pk:
+            self.creator = get_current_user()
         super().save(*args, **kwargs)
         self.device.save()

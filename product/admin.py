@@ -69,11 +69,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    exclude = ['creator']
+    list_display = ['event', 'date', 'creator', 'comment']
+    # exclude = ['creator']
     list_filter = ['event']
     date_hierarchy = 'date'
-    
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.creator = request.user
-        obj.save()

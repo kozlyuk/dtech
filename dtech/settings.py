@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dtech.middleware.ExceptionHandler',
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'dtech.urls'

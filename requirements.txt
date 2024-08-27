@@ -8,6 +8,7 @@ Pillow
 # django-celery-results==1.1.2
 # django-summernote==0.8.11.6
 # admin-totals
+django-crum
 
 # Deploying tools
 python_dotenv
