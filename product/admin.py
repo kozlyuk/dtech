@@ -65,3 +65,15 @@ class DeviceAdmin(admin.ModelAdmin):
         obj.status = obj.get_status()
         obj.save(update_fields=["status"])
         return obj
+    
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    exclude = ['creator']
+    list_filter = ['event']
+    date_hierarchy = 'date'
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.creator = request.user
+        obj.save()
