@@ -144,23 +144,31 @@ class Device(models.Model):
 class Event(models.Model):
 
     Issued = 'IS'
+    FrameAssembly = 'FA'
+    BasicAssembly = 'BA'
+    FinalAssembly = 'FA'
     Accepted = 'AC'
     Configured = 'CO'
     Tested = 'TE'
     Sent = 'SE'
     Rejected = 'RE'
-    Fixed = 'FI'
+    Fixed = 'FX'
+    Other = 'OT'
     EVENT_CHOICES = (
         (Issued, _('Issued for work')),
+        (FrameAssembly, _('Frame assembly')),
+        (BasicAssembly, _('Basic assembly')),
+        (FinalAssembly, _('Final assembly')),
         (Accepted, _('Accepted from producer')),
         (Configured, _('Configured')),
         (Tested, _('Tested')),
         (Rejected, _('Rejected')),
         (Sent, _('Sent to customer')),
         (Fixed, _('Fixed')),
+        (Other, _('Other')),
     )
     
-    device = models.ForeignKey(Device, verbose_name= _('Device'), null=True, on_delete=models.SET_NULL)
+    device = models.ForeignKey(Device, verbose_name= _('Device'), on_delete=models.PROTECT)
     date = models.DateField('Date')
     event = models.CharField(_('Event'), max_length=2, choices=EVENT_CHOICES, default=Issued)
     comment = models.CharField('Comment', max_length=255, blank=True, null=True)
