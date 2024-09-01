@@ -15,4 +15,4 @@ class ChangeOrderForm(forms.Form):
 class AddEventForm(forms.Form):
     event = forms.ChoiceField(choices=Event.EVENT_CHOICES, label='Тип подія')
     date = forms.DateField(widget=DateInput, label='Дата події')
-    comment = forms.CharField(label='Коментар')
+    comment = forms.CharField(label='Коментар', required=False)

@@ -7,7 +7,7 @@ from product.models import Device
 
 class DeviceInline(admin.TabularInline):
     model = Device
-    fields = ['serial_number', 'executor', 'configuration']
+    fields = ['executor', 'configuration']
     extra = 0
 
 

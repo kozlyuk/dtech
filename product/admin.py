@@ -47,7 +47,7 @@ class DeviceAdmin(admin.ModelAdmin):
     list_filter = ['configuration', 'executor', 'status']
     search_fields = ['serial_number', 'order__deal_number']
     exclude = ['creator']
-    readonly_fields = ['status']
+    readonly_fields = ['serial_number', 'status']
     inlines = [EventInline]
     actions=['change_order','add_event']
 
@@ -86,7 +86,7 @@ class DeviceAdmin(admin.ModelAdmin):
             return HttpResponseRedirect(request.get_full_path())
         
         if not form:
-            form = ChangeOrderForm(initial={'_selected_action': "_selected_action"})
+            form = ChangeOrderForm(initial={'_selected_action': request.POST.getlist("_selected_action")})
                         
         return render(request,
                       'admin/order_intermediate.html',
@@ -115,7 +115,7 @@ class DeviceAdmin(admin.ModelAdmin):
             return HttpResponseRedirect(request.get_full_path())
         
         if not form:
-            form = AddEventForm()
+            form = AddEventForm(initial={'_selected_action': request.POST.getlist("_selected_action")})
                         
         return render(request,
                       'admin/add_event.html',

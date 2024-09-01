@@ -100,7 +100,7 @@ class Device(models.Model):
         (Fixed, _('Fixed')),
     )
     
-    serial_number = models.IntegerField(_('Serial number'), unique=True)
+    serial_number = models.IntegerField(_('Serial number'), blank=True, null=True, unique=True)
     executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), on_delete=models.PROTECT)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
@@ -115,7 +115,12 @@ class Device(models.Model):
 
     def __str__(self):
         return str(self.serial_number)
-
+    
+    def save(self, *args, **kwargs):
+        if not self.serial_number:
+            self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+        super().save(*args, **kwargs)
+        
     def get_status(self):
         last_event = self.event_set.last()
         event_status = last_event.event if last_event else None
@@ -146,7 +151,7 @@ class Event(models.Model):
     Issued = 'IS'
     FrameAssembly = 'FA'
     BasicAssembly = 'BA'
-    FinalAssembly = 'FA'
+    FinalAssembly = 'FI'
     Accepted = 'AC'
     Configured = 'CO'
     Tested = 'TE'
