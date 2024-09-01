@@ -193,12 +193,12 @@ msgid "Frame assembly"
 msgstr "Збірка рами"
 
 #: product/models.py:160
-msgid "Базова збірка"
-msgstr ""
+msgid "Basic assembly"
+msgstr "Базова збірка"
 
 #: product/models.py:161
-msgid "Фінальна збірка"
-msgstr ""
+msgid "Final assembly"
+msgstr "Фінальна збірка"
 
 #: product/models.py:168
 msgid "Other"

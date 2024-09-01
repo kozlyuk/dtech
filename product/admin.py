@@ -1,8 +1,11 @@
 """ Admin configuration for Product app """
 
 from django.contrib import admin
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from product.models import ComponentType, Component, Configuration, Device, Event
+from product.forms import ChangeOrderForm, AddEventForm
 
 @admin.register(ComponentType)
 class ComponentTypeAdmin(admin.ModelAdmin):
@@ -46,6 +49,7 @@ class DeviceAdmin(admin.ModelAdmin):
     exclude = ['creator']
     readonly_fields = ['status']
     inlines = [EventInline]
+    actions=['change_order','add_event']
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -65,11 +69,61 @@ class DeviceAdmin(admin.ModelAdmin):
         obj.status = obj.get_status()
         obj.save(update_fields=["status"])
         return obj
-    
+
+    @admin.action(description='Змінити замовлення')
+    def change_order(self, request, queryset):
+        form = None
+
+        if 'apply' in request.POST:
+            form = ChangeOrderForm(request.POST)
+            
+            if form.is_valid():
+                order = form.cleaned_data['order']
+                queryset.update(order=order)
+                
+            self.message_user(request,
+                              "Changed order on {} devices".format(queryset.count()))
+            return HttpResponseRedirect(request.get_full_path())
+        
+        if not form:
+            form = ChangeOrderForm(initial={'_selected_action': "_selected_action"})
+                        
+        return render(request,
+                      'admin/order_intermediate.html',
+                      {'items': queryset, 'form': form, 'title': 'Змінити замовлення'})
+
+
+    @admin.action(description='Додати подію')
+    def add_event(self, request, queryset):
+        form = None
+
+        if 'apply' in request.POST:
+            form = AddEventForm(request.POST)
+            
+            if form.is_valid():
+                event = form.cleaned_data['event']
+                date = form.cleaned_data['date']
+                comment = form.cleaned_data['comment']
+                for device in queryset:
+                    Event.objects.create(device=device,
+                                         event=event,
+                                         date=date,
+                                         comment=comment)
+                
+            self.message_user(request,
+                              "Added event to {} devices".format(queryset.count()))
+            return HttpResponseRedirect(request.get_full_path())
+        
+        if not form:
+            form = AddEventForm()
+                        
+        return render(request,
+                      'admin/add_event.html',
+                      {'items': queryset, 'form': form, 'title': 'Додати подію'})    
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ['event', 'date', 'creator', 'comment']
-    # exclude = ['creator']
+    exclude = ['creator']
     list_filter = ['event']
     date_hierarchy = 'date'

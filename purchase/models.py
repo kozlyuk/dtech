@@ -39,7 +39,7 @@ class Order(models.Model):
         ordering = ['-creation_date', 'deal_number']
 
     def __str__(self):
-        return self.deal_number
+        return f'{self.deal_number} - {self.customer}' 
 
     # def save(self, *args, logging=True, **kwargs):
     #     if not self.pk:

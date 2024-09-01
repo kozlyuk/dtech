@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <form method="post" action="">
+    {% csrf_token %}
+
+    {{ form }}
+
+    <br><p>Замовлення буде змінене для наступних пристроїв:</p>
+    {% for item in items %}
+      <p>{{ item }}</p>
+    {% endfor %}
+
+    <input type="hidden" name="action" value="change_order">
+    <input type="submit" name="apply" value="Змінити замовлення">
+  </form>
+{% endblock %}
