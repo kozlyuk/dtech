@@ -1,6 +1,6 @@
 """ Models for managing products """
 
-from datetime import datetime, date
+from datetime import datetime
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Max
@@ -119,6 +119,7 @@ class Device(models.Model):
     def save(self, *args, **kwargs):
         if not self.serial_number:
             self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+        self.status = self.get_status()
         super().save(*args, **kwargs)
         
     def get_status(self):
