@@ -80,31 +80,12 @@ class Configuration(models.Model):
 
 class Device(models.Model):
     """ Model contains Devices """
-    
-    Created = 'CR'
-    InWork = 'IW'
-    Configured = 'CO'
-    Tested = 'TE'
-    Accepted = 'AC'
-    Sent = 'SE'
-    Rejected = 'RE'
-    Fixed = 'FI'
-    STATUS_CHOICES = (
-        (Created, _('Created')),
-        (InWork, _('In work')),
-        (Accepted, _('Accepted from producer')),
-        (Configured, _('Configured')),
-        (Tested, _('Tested')),
-        (Rejected, _('Rejected')),
-        (Sent, _('Sent to customer')),
-        (Fixed, _('Fixed')),
-    )
-    
+
     serial_number = models.IntegerField(_('Serial number'), blank=True, null=True, unique=True)
     executor = models.ForeignKey(Contractor, verbose_name=_('Executor'), on_delete=models.PROTECT)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     configuration = models.ForeignKey(Configuration, on_delete=models.PROTECT)
-    status = models.CharField(_('Status'), max_length=2, choices=STATUS_CHOICES, default=Created)
+    status = models.CharField(_('Status'), max_length=30)
 
     # Creating information
     creation_date = models.DateField(auto_now_add=True)
@@ -119,32 +100,9 @@ class Device(models.Model):
     def save(self, *args, **kwargs):
         if not self.serial_number:
             self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
-        self.status = self.get_status()
-        super().save(*args, **kwargs)
-        
-    def get_status(self):
         last_event = self.event_set.last()
-        event_status = last_event.event if last_event else None
-        match event_status:
-            case None:
-                self.status = self.Created
-            case Event.Issued:
-                self.status = self.InWork
-            case Event.Accepted:
-                self.status = self.Accepted
-            case Event.Configured:
-                self.status = self.Configured
-            case Event.Tested:
-                self.status = self.Tested
-            case Event.Sent:
-                self.status = self.Sent
-            case Event.Rejected:
-                self.status = self.Rejected
-            case Event.Fixed:
-                self.status = self.Fixed
-            case _:
-                pass
-        return self.status
+        self.status = last_event.get_event_display() if last_event else _('Issued for work')
+        super().save(*args, **kwargs)
 
 
 class Event(models.Model):
