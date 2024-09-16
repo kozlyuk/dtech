@@ -100,9 +100,10 @@ class Device(models.Model):
     def save(self, *args, **kwargs):
         if not self.serial_number:
             self.serial_number = Device.objects.aggregate(Max('serial_number'))['serial_number__max'] + 1
+        super().save(*args, **kwargs)
         last_event = self.event_set.last()
         self.status = last_event.get_event_display() if last_event else _('Issued for work')
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs, update_fields=['status'])
 
 
 class Event(models.Model):
