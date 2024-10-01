@@ -110,7 +110,11 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['event', 'date', 'creator', 'comment']
+    list_display = ['device', 'event', 'date', 'creator', 'get_configuration', 'comment']
     exclude = ['creator']
-    list_filter = ['event']
+    list_filter = ['event', 'creator']
     date_hierarchy = 'date'
+
+    def get_configuration(self, obj):
+        return obj.device.configuration
+    get_configuration.short_description = 'Configuration'
