@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CMontserrat:100,200,300,400,500,600,700,800,900">
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	</head>
+
+	<body>
+        <div class="preloader">
+          <div class="preloader-body">
+            <div class="preloader-item"></div>
+          </div>
+        </div>
+        <div class="page">
+          <div class="position-relative">
+            <header class="page-header">
+              <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                  <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                  <div class="rd-navbar-main">
+                    <!--RD Navbar Panel-->
+                    <div class="rd-navbar-panel">
+                      <!--RD Navbar Toggle-->
+                      <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                      <!--RD Navbar Brand-->
+                      <div class="rd-navbar-brand">
+                        <!--Brand--><a class="brand" href=""><img src="{% static 'images/logo.svg' %}" alt=""/></a>
+                      </div>
+                    </div>
+                    <div class="rd-navbar-main-element">
+                      <div class="rd-navbar-nav-wrap">
+                        <ul class="rd-navbar-nav">
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="#features">Особливості та переваги</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="#accessories">Опції</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="#gallery">Галерея</a>
+                          </li>
+                          <li class="rd-nav-item"><a class="rd-nav-link" href="#contacts">Контакти</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="rd-navbar-collapse">
+                      <ul class="social-menu justify-content-center">
+                        {% comment %} <li><a class="icon novi-icon fl-glypho-tumblr1" href="#"></a></li>
+                        <li><a class="icon novi-icon fl-glypho-twitter" href="#"></a></li>
+                        <li><a class="icon novi-icon fl-glypho-facebook2" href="#"></a></li> {% endcomment %}
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </header>
+
+			{% block content %}
+			{% endblock content %}
+
+		</div>
+		<div class="snackbars" id="form-output-global"></div>
+		<script src="{% static 'js/core.min.js' %}"></script>
+		<script src="{% static 'js/script.js' %}"></script>
+	</body>
+</html>
+
