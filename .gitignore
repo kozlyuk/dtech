@@ -3,6 +3,6 @@ __pycache__
 diff
 .env
 media
-static/admin
+static
 
 venv

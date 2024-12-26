@@ -1682,7 +1682,7 @@ p + .list-marked {
 
 @media (min-width: 768px) {
 	.list-product-title {
-		min-width: 150px;
+		min-width: 320px;
 	}
 }
 
