@@ -3,6 +3,7 @@ __pycache__
 diff
 .env
 media
-static
+static/
+Photo/
 
 venv
