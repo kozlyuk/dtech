@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'structure.apps.StructureConfig',
     'purchase.apps.PurchaseConfig',
+    'landing.apps.LandingConfig',
     # 'messaging.apps.MessagingConfig',
     # 'django_celery_results',
     # 'django_summernote',
@@ -115,7 +116,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'Europe/Kyiv'
 
 DATE_FORMAT = "d.m.Y"
 
@@ -129,7 +130,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATICFILES_DIRS = []
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
