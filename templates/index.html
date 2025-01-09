@@ -357,34 +357,30 @@
         <div class="col-md-6">
           <h3>Зв'язок з нами</h3>
           {% comment %} <p class="big">Щоб отримати додаткову інформацію, залиште повідомлення або відгук.</p> {% endcomment %}
-          <form class="rd-form rd-mailform rd-mailform-contact" action="" method="post" id="contact-form">{% csrf_token %}
+          <form method="post" enctype="multipart/form-data" id="contact-form">{% csrf_token %}
             <div class="row row-30">
               <div class="col-md-6">
-                <div class="form-wrap">
+                <div class="form-grp">
                   {{ form.name }}
-                  {{form.name.errors}}
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="form-wrap">
+                <div class="form-grp">
                   {{ form.phone }}
-                  {{form.phone.errors}}
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="form-wrap">
+                <div class="form-grp">
                   {{ form.email }}
-                  {{form.email.errors}}
                 </div>
               </div>
               <div class="col-12">
-                <div class="form-wrap">
+                <div class="form-grp">
                   {{ form.message }}
-                  {{form.message.errors}}
                 </div>
               </div>
             </div>
-            <button class="button button-icon button-icon-right button-primary-outline" type="submit"><span class="icon material-icons-chevron_right"></span>Надіслати</button>
+            <button type="submit" class="button button-icon button-icon-right button-primary-outline"><span class="icon material-icons-chevron_right"></span>Надіслати</button>
           </form>
         </div>
         <div class="col-md-6 mt-5 mt-md-0">
