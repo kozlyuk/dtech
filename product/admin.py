@@ -111,7 +111,7 @@ class DeviceAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ['device', 'event', 'date', 'creator', 'get_configuration', 'comment']
-    # exclude = ['creator']
+    search_fields = ['device__serial_number']
     list_filter = ['event', 'creator']
     date_hierarchy = 'date'
 
