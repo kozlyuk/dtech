@@ -37,7 +37,8 @@ class ConfigurationAdmin(admin.ModelAdmin):
 
 class EventInline(admin.TabularInline):
     model = Event
-    fields = ['event', 'date', 'comment']
+    fields = ['event', 'date', 'comment', 'creator']
+    readonly_fields = ['creator']
     extra = 0
 
 
