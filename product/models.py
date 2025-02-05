@@ -143,6 +143,7 @@ class Event(models.Model):
         verbose_name = _('Event')
         verbose_name_plural = _('Events')
         ordering = ['date', 'pk']
+        unique_together = ['device', 'event']
 
     def __str__(self):
         return f'{self.date} - {self.event}'
