@@ -3,6 +3,8 @@
 from django.contrib import admin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.utils.html import format_html
 
 from product.models import ComponentType, Component, Configuration, Device, Event
 from product.forms import ChangeOrderForm, AddEventForm
@@ -46,7 +48,7 @@ class EventInline(admin.TabularInline):
 class DeviceAdmin(admin.ModelAdmin):
     list_display = ['serial_number', 'configuration', 'executor', 'order', 'status']
     list_filter = ['configuration', 'executor', 'status']
-    search_fields = ['serial_number', 'order__deal_number']
+    search_fields = ['serial_number', 'order__deal_number', 'order__customer__name']
     exclude = ['creator']
     readonly_fields = ['serial_number', 'status']
     inlines = [EventInline]
@@ -111,7 +113,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['device', 'event', 'date', 'creator', 'get_configuration', 'comment']
+    list_display = ['event', 'link_to_device', 'date', 'creator', 'get_configuration', 'comment']
     search_fields = ['device__serial_number']
     list_filter = ['event', 'creator']
     date_hierarchy = 'date'
@@ -119,3 +121,8 @@ class EventAdmin(admin.ModelAdmin):
     def get_configuration(self, obj):
         return obj.device.configuration
     get_configuration.short_description = 'Configuration'
+
+    def link_to_device(self, obj):
+        link = reverse("admin:product_device_change", args=[obj.device_id])
+        return format_html('<a href="{}">{}</a>', link, obj.device)
+    link_to_device.short_description = 'Подія'
